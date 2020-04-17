@@ -9,11 +9,22 @@ public class LCM {
     return (long) a * b;
   }
 
+  private static long lcm_fast(int a, int b) {
+    long max = (long) a > b ? a : b;
+    long min = (long) a < b ? a : b;
+
+    for (long i = 1; i < min; i++) {
+      if (max*i % min == 0)
+        return max*i;
+    }
+    return (long) a*b;
+  }
+
   public static void main(String args[]) {
     Scanner scanner = new Scanner(System.in);
     int a = scanner.nextInt();
     int b = scanner.nextInt();
 
-    System.out.println(lcm_naive(a, b));
+    System.out.println(lcm_fast(a, b));
   }
 }
