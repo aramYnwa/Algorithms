@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.BigInteger;
 
 public class FibonacciSumSquares {
     private static long getFibonacciSumSquaresNaive(long n) {
@@ -19,7 +20,8 @@ public class FibonacciSumSquares {
         return sum % 10;
     }
     
-    private static long getFibonacciSumSquaresFast(long n) {
+    private static long getFibonacciSumSquaresFast(BigInteger num) {
+        int n = num.mod(BigInteger.valueOf(60)).intValue();
         if (n <= 1)
             return  n;
 
@@ -37,7 +39,7 @@ public class FibonacciSumSquares {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        long n = scanner.nextLong();
+        BigInteger n = scanner.nextBigInteger();
         long s = getFibonacciSumSquaresFast(n);
         System.out.println(s);
     }
