@@ -1,6 +1,7 @@
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class FibonacciPartialSum {
+public class FibonacciPartialSumTest {
     private static long getFibonacciPartialSumNaive(long from, long to) {
         long sum = 0;
 
@@ -19,6 +20,7 @@ public class FibonacciPartialSum {
 
         return sum % 10;
     }
+
 
     private static long getFibonacciPartialSumFast(long from, long to) {
         
@@ -43,12 +45,32 @@ public class FibonacciPartialSum {
 
         return sum;
     }
-    
+
+
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        long from = scanner.nextLong();
-        long to = scanner.nextLong();
-        System.out.println(getFibonacciPartialSumFast(from, to));
+        int counter = 50;
+        while (counter > 0) {
+            int firstNumber = ThreadLocalRandom.current().nextInt(1,100);
+            int secondNumber = ThreadLocalRandom.current().nextInt(firstNumber,100);
+
+            // int firstNumber = 40;
+            // int secondNumber = 62;
+        
+            System.out.printf("Numbers are %d, %d \n", firstNumber, secondNumber); 
+            long fastSoluction = getFibonacciPartialSumFast(firstNumber, secondNumber);
+            long naiveSolution = getFibonacciPartialSumNaive(firstNumber, secondNumber);
+
+            System.out.println();
+            System.out.printf("Fast result %d \n", fastSoluction);
+            System.out.printf("Naive result %d \n", naiveSolution);
+            if (fastSoluction != naiveSolution) {
+                System.out.println("Error!");
+                break;
+            }
+
+            counter --;
+        }
     }
 }
 
