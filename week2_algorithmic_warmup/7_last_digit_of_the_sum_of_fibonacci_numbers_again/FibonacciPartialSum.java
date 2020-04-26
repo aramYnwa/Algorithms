@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.BigInteger;
 
 public class FibonacciPartialSum {
     private static long getFibonacciPartialSumNaive(long from, long to) {
@@ -20,23 +21,30 @@ public class FibonacciPartialSum {
         return sum % 10;
     }
 
-    private static long getFibonacciPartialSumFast(long from, long to) {
+    private static long getFibonacciPartialSumFast(BigInteger bigFrom, BigInteger bigTo) {
         
-        if (from >= 60 && to >= 60) {
-            from = from % 60;
-            to = to % 60;
+        BigInteger f = bigFrom.mod(BigInteger.valueOf(60));
+        BigInteger t = bigTo.mod(BigInteger.valueOf(60));
+        int from;
+        int to;
+        if (f.compareTo(t) < 1) {
+            from = f.intValue();
+            to = t.intValue();
+        } else {
+            from = bigFrom.intValue();
+            to = bigTo.intValue();
         }
 
-        long sum = 0;
-        long current = 0;
-        long next  = 1;
+        int sum = 0;
+        int current = 0;
+        int next  = 1;
 
         for (long i = 0; i <= to; ++i) {
             if (i >= from) {
                  sum = (sum + current) % 10;
             }
 
-            long new_current = next % 10;
+            int new_current = next % 10;
             next = next + current % 10;
             current = new_current % 10;
         }
@@ -46,8 +54,8 @@ public class FibonacciPartialSum {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        long from = scanner.nextLong();
-        long to = scanner.nextLong();
+        BigInteger from = scanner.nextBigInteger();
+        BigInteger to = scanner.nextBigInteger();
         System.out.println(getFibonacciPartialSumFast(from, to));
     }
 }
