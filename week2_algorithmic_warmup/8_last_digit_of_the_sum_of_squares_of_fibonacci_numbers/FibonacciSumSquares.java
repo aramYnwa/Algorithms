@@ -32,7 +32,6 @@ public class FibonacciSumSquares {
             current = (tmp_previous + current) % 10;
         }
 
-        System.out.printf("res: %d", (previous * current));
         return (previous * current) % 10;    
     }
 

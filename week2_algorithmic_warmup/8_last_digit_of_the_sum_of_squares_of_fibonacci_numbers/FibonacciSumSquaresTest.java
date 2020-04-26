@@ -41,7 +41,7 @@ public class FibonacciSumSquaresTest {
         int counter = 50;
         while (counter > 0) {
             //int number = ThreadLocalRandom.current().nextInt(1, 100);
-            int number = 1234567890;
+            int number = 2;
         
             System.out.printf("Number is %d \n", number); 
             long fastSoluction = getFibonacciSumSquaresFast(number);

@@ -36,9 +36,9 @@ public class FibonacciPartialSum {
                  sum = (sum + current) % 10;
             }
 
-            long new_current = next;
-            next = next + current;
-            current = new_current;
+            long new_current = next % 10;
+            next = next + current % 10;
+            current = new_current % 10;
         }
 
         return sum;

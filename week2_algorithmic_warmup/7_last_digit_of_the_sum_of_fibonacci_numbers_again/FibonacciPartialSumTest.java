@@ -38,9 +38,9 @@ public class FibonacciPartialSumTest {
                  sum = (sum + current) % 10;
             }
 
-            long new_current = next;
-            next = next + current;
-            current = new_current;
+            long new_current = next % 10;
+            next = next + current % 10;
+            current = new_current % 10;
         }
 
         return sum;
@@ -51,11 +51,11 @@ public class FibonacciPartialSumTest {
     public static void main(String[] args) {
         int counter = 50;
         while (counter > 0) {
-            int firstNumber = ThreadLocalRandom.current().nextInt(1,100);
-            int secondNumber = ThreadLocalRandom.current().nextInt(firstNumber,100);
+            // int firstNumber = ThreadLocalRandom.current().nextInt(0,100);
+            // int secondNumber = ThreadLocalRandom.current().nextInt(firstNumber,100);
 
-            // int firstNumber = 40;
-            // int secondNumber = 62;
+            int firstNumber = 10;
+            int secondNumber = 200;
         
             System.out.printf("Numbers are %d, %d \n", firstNumber, secondNumber); 
             long fastSoluction = getFibonacciPartialSumFast(firstNumber, secondNumber);
