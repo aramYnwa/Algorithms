@@ -1,6 +1,7 @@
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class FibonacciSumLastDigit {
+public class FibonacciSumLastDigitTest {
     private static long getFibonacciSumNaive(long n) {
         if (n <= 1)
             return n;
@@ -18,7 +19,7 @@ public class FibonacciSumLastDigit {
 
         return sum % 10;
     }
-
+    
     private static long getFibonacciSumFast(long n) {
         
         //There is a period with length 60.
@@ -40,12 +41,27 @@ public class FibonacciSumLastDigit {
 
         return sum;    
     }
-    
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        long n = scanner.nextLong();
-        long s = getFibonacciSumFast(n);
-        System.out.println(s);
-    }
+
+      public static void main(String[] args) {
+        int counter = 100;
+        long i = 0;
+        while (counter > 0) {
+            //long n = ThreadLocalRandom.current().nextLong(1, 100);
+            long n = i;
+            System.out.printf("Number n:%d \n", n);
+            long fastSolution = getFibonacciSumFast(n);
+            long naiveSolution = getFibonacciSumNaive(n);
+
+            System.out.printf("Fast result %d \n", fastSolution);            
+            System.out.printf("Naive result %d \n", naiveSolution);
+            if (fastSolution != naiveSolution) {
+                System.out.println("Error!");
+                break;
+            }
+            System.out.println();
+            counter --;
+            i ++;
+        }
+   }
 }
 
