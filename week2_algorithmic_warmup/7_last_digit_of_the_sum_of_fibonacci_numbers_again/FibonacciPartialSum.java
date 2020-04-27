@@ -21,35 +21,46 @@ public class FibonacciPartialSum {
         return sum % 10;
     }
 
-    private static long getFibonacciPartialSumFast(BigInteger bigFrom, BigInteger bigTo) {
+     private static long getFibonacciPartialSumFast(BigInteger bigFrom, BigInteger bigTo) {
         
-        BigInteger f = bigFrom.mod(BigInteger.valueOf(60));
-        BigInteger t = bigTo.mod(BigInteger.valueOf(60));
-        int from;
-        int to;
-        if (f.compareTo(t) < 1) {
-            from = f.intValue();
-            to = t.intValue();
-        } else {
-            from = bigFrom.intValue();
-            to = bigTo.intValue();
-        }
-
-        int sum = 0;
+        int from = bigFrom.mod(BigInteger.valueOf(60)).intValue();
+        int to = bigTo.mod(BigInteger.valueOf(60)).intValue();
+    
+        int fs = 0;
+        int ts = 0;
         int current = 0;
         int next  = 1;
 
-        for (long i = 0; i <= to; ++i) {
-            if (i >= from) {
-                 sum = (sum + current) % 10;
+
+        if (from <= to) {
+            for (long i = 0; i <= to; ++i) {
+                if (i < from ) {
+                    fs = (fs + current) % 10;
+                } 
+                ts = (ts + current) % 10;
+                int new_current = next % 10;
+                next = next + current % 10;
+                current = new_current % 10;
             }
-
-            int new_current = next % 10;
-            next = next + current % 10;
-            current = new_current % 10;
+            if (ts < fs) {
+                return 10 +ts - fs;
+            } else return ts - fs;
+        } else {
+            for (long i = 0; i < from; ++i) {
+                if (i <= to) {
+                    fs = (fs + current) % 10;
+                } 
+                ts = (ts + current) % 10;
+                int new_current = next % 10;
+                next = next + current % 10;
+                current = new_current % 10;
+            }
+            if (fs < ts) {
+                return 10 +fs - ts;
+            } else return fs - ts;
         }
-
-        return sum;
+        
+       
     }
     
     public static void main(String[] args) {
